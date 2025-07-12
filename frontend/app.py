@@ -30,7 +30,7 @@ with col1:
     if st.button("Generate Hashtags"):
         if product_name and product_description:
             with st.spinner("Generating hashtags..."):
-                response = requests.post("http://127.0.0.1:8000/generate_hashtags", json={"name": product_name, "description": product_description})
+                response = requests.post(st.secrets["BACKEND_URL"] + "/generate_hashtags", json={"name": product_name, "description": product_description})
                 if response.status_code == 200:
                     hashtags = response.json()["hashtags"]
                     st.session_state.hashtags = hashtags
@@ -42,7 +42,7 @@ with col1:
     if st.button("Create Post"):
         if product_name and product_description:
             with st.spinner("Creating post..."):
-                response = requests.post("http://127.0.0.1:8000/create_post", json={"name": product_name, "description": product_description})
+                response = requests.post(st.secrets["BACKEND_URL"] + "/create_post", json={"name": product_name, "description": product_description})
                 if response.status_code == 200:
                     post = response.json()["post"]
                     st.session_state.post = post
@@ -54,7 +54,7 @@ with col1:
     if st.button("Generate Video"):
         if product_name and product_description:
             with st.spinner("Generating video..."):
-                response = requests.post("http://127.0.0.1:8000/generate_video", json={"name": product_name, "description": product_description})
+                response = requests.post(st.secrets["BACKEND_URL"] + "/generate_video", json={"name": product_name, "description": product_description})
                 if response.status_code == 200:
                     message = response.json()["message"]
                     st.session_state.video_message = message
